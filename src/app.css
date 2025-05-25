@@ -1,0 +1,41 @@
+:root {
+  --bg-dark: #121212;
+  --bg-card: #181818;
+  --accent: #1db954;
+  --text-light: #f8f8f8;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+.playlist-song-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.playlist-song {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #181818;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  color: white;
+}
+
+.text-info {
+  flex: 1;
+  padding-right: 1rem;
+}
+
+.small-cover {
+  width: 80px;
+  height: 80px;
+  border-radius: 0.5rem;
+  object-fit: cover;
+}
