@@ -20,7 +20,7 @@ Willkommen zur MusikApp – einer modernen, webbasierten Anwendung zur Verwaltun
 - [⚙️ Technologien](#️-technologien)
 - [🚀 Deployment (Netlify)](#-deployment-netlify)
 - [🛠️ Lokale Installation](#️-lokale-installation)
-- [📦 .env Beispiel](#-env-beispiel)
+  
 
 ---
 
@@ -173,16 +173,6 @@ npm run dev
 ```
 
 ---
-
-## 📦 .env Beispiel (optional)
-
-Falls du mit Umgebungsvariablen arbeitest:
-
-```env
-DB_URI=mongodb+srv://username:password@cluster0.mongodb.net/musikapp
-```
-
-> In deinem `db.ts` wird diese Variable dann mit `process.env.DB_URI` verwendet.
 
 ---
 
