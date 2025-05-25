@@ -50,22 +50,23 @@ Die MusikApp ist eine kleine Musikbibliothek zum Hochladen, Verwalten und Organi
 ---
 
 ## 📁 Dateistruktur (Auszug)
+
+```
 /src
-├─ /routes
-│ ├─ +page.svelte → Startseite
-│ ├─ /songs → Songübersicht & Favoritenbutton
-│ ├─ /favorites → Favoritenanzeige
-│ ├─ /playlists → Playlists + Detailseiten
-│ ├─ /playlists/new → Neues Playlistformular
-│ └─ /import → Song-Importformular
-│
-├─ /lib
-│ ├─ db.ts → MongoDB-Verbindung & Helper
-│ └─ Toast.svelte → Benachrichtigungs-Komponente
-│
-└─ svelte.config.js
-
-
+ ├─ /routes
+ │   ├─ +page.svelte              → Startseite
+ │   ├─ /songs                    → Songübersicht & Favoritenbutton
+ │   ├─ /favorites                → Favoritenanzeige
+ │   ├─ /playlists                → Playlists + Detailseiten
+ │   ├─ /playlists/new            → Neues Playlistformular
+ │   └─ /import                   → Song-Importformular
+ │
+ ├─ /lib
+ │   ├─ db.ts                     → MongoDB-Verbindung & Helper
+ │   └─ Toast.svelte              → Benachrichtigungs-Komponente
+ │
+ └─ svelte.config.js
+```
 
 ---
 
@@ -73,7 +74,7 @@ Die MusikApp ist eine kleine Musikbibliothek zum Hochladen, Verwalten und Organi
 
 ### Songs
 
-`json
+```json
 {
   "_id": "ObjectId",
   "titel": "Songtitel",
@@ -81,74 +82,120 @@ Die MusikApp ist eine kleine Musikbibliothek zum Hochladen, Verwalten und Organi
   "audio_url": "https://...",
   "cover_url": "https://..."
 }
+```
 
-Playlists
-json
+### Playlists
+
+```json
 {
   "_id": "ObjectId",
   "name": "Meine Playlist",
   "beschreibung": "Beschreibung der Playlist",
   "songs": ["songId1", "songId2"]
 }
+```
 
+### Favorites
 
-Favorites
-Wird via insertOne() in eine eigene Collection gespeichert. Struktur ist identisch mit Songs.
+Wird via `insertOne()` in eine eigene Collection gespeichert. Struktur ist identisch mit Songs.
 
+---
 
-📄 Seitenübersicht
-Seite	Funktion
-/	Startseite mit Navigation, Highlights & Artists
-/songs	Alle Songs anzeigen, abspielen, ❤️ markieren
-/favorites	Favorisierte Songs verwalten
-/import	Songs via Formular hinzufügen
-/playlists	Playlists anzeigen + neue Playlist erstellen
-/playlists/new	Neue Playlist anlegen
-/playlists/[id]	Playlist-Details: Songs anzeigen + hinzufügen
+## 📄 Seitenübersicht
 
-🧱 Komponenten
-+layout.svelte: Globale Navigation (Sidebar)
+| Seite              | Funktion                                           |
+|--------------------|----------------------------------------------------|
+| `/`                | Startseite mit Navigation, Highlights & Artists   |
+| `/songs`           | Alle Songs anzeigen, abspielen, ❤️ markieren      |
+| `/favorites`       | Favorisierte Songs verwalten                      |
+| `/import`          | Songs via Formular hinzufügen                     |
+| `/playlists`       | Playlists anzeigen + neue Playlist erstellen      |
+| `/playlists/new`   | Neue Playlist anlegen                             |
+| `/playlists/[id]`  | Playlist-Details: Songs anzeigen + hinzufügen     |
 
-+page.svelte: Für jede Route eigene Seitenstruktur
+---
 
-Toast.svelte: Reusable Benachrichtigungs-Komponente
+## 🧱 Komponenten
 
-Formulare: Import, neue Playlists, Song-Favoriten
+- **+layout.svelte**: Globale Navigation (Sidebar)
+- **+page.svelte**: Für jede Route eigene Seitenstruktur
+- **Toast.svelte**: Reusable Benachrichtigungs-Komponente
+- **Formulare**: Import, neue Playlists, Song-Favoriten
+- **CRUD Actions**: Über FormActions und MongoDB
 
-CRUD Actions: Über FormActions und MongoDB
+---
 
-⚙️ Technologien
-Frontend: SvelteKit 5, TypeScript
+## ⚙️ Technologien
 
-Styling: CSS Grid, Flexbox, Bootstrap-Klassen
+- **Frontend**: [SvelteKit 5](https://kit.svelte.dev/), TypeScript
+- **Styling**: CSS Grid, Flexbox, Bootstrap-Klassen
+- **Backend**: MongoDB Atlas (Cloud), `mongodb` Node.js Driver
+- **Deployment**: Netlify (automatisch via GitHub)
 
-Backend: MongoDB Atlas (Cloud), mongodb Node.js Driver
+---
 
-Deployment: Netlify (automatisch via GitHub)
+## 🚀 Deployment (Netlify)
 
-🚀 Deployment (Netlify)
+Konfiguration:
+
+```bash
 npm install -D @sveltejs/adapter-netlify
-svelte.config.js:
+```
 
+`svelte.config.js`:
+
+```ts
 import adapter from '@sveltejs/adapter-netlify';
 export default {
   kit: {
     adapter: adapter()
   }
 };
-netlify.toml:
+```
 
+`netlify.toml`:
+
+```toml
 [build]
   command = "npm run build"
   publish = "build"
+```
 
-🛠️ Lokale Installation
+---
 
+## 🛠️ Lokale Installation
+
+```bash
 git clone https://github.com/MergimGara/musik-app-runes.git
 cd musik-app-runes
 npm install
+npm run dev
+```
 
-📮 Kontakt
-Autor: Mergim Gara
-E-Mail: garamer1@students.zhaw.ch
-Deploy-URL: https://musik-app-runes.netlify.app/
+---
+
+## 📦 .env Beispiel (optional)
+
+Falls du mit Umgebungsvariablen arbeitest:
+
+```env
+DB_URI=mongodb+srv://username:password@cluster0.mongodb.net/musikapp
+```
+
+> In deinem `db.ts` wird diese Variable dann mit `process.env.DB_URI` verwendet.
+
+---
+
+## 📮 Kontakt
+
+**Autor**: Mergim Gara  
+**E-Mail**: garamer1@students.zhaw.ch  
+**Deploy-URL**: https://musik-app-runes.netlify.app/
+
+---
+
+## ✅ Status
+
+🟢 **Projekt abgeschlossen und vollständig deployt**  
+🔒 Ready for submission – alle Anforderungen erfüllt ✔️
+
