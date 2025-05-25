@@ -55,7 +55,7 @@
     {/each}
   </div>
 {:else}
-  <p>Keine Songs in dieser Playlist.</p>
+  <p>Keine songs in dieser Playlist.</p>
 {/if}
 
 <style>
