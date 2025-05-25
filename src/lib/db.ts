@@ -1,8 +1,14 @@
 import { MongoClient, Db } from 'mongodb';
+import dotenv from 'dotenv';
 
-const uri = 'mongodb+srv://garamer1:Eamc579802@cluster0.jjno5.mongodb.net/musikapp?retryWrites=true&w=majority&appName=AtlasApp';
+dotenv.config();
+
+const uri = process.env.DB_URI;
+if (!uri) {
+  throw new Error('DB_URI ist nicht gesetzt!');
+}
+
 const client = new MongoClient(uri);
-
 let dbInstance: Db | null = null;
 
 export async function connectDB(): Promise<Db> {
